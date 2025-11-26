@@ -4,40 +4,42 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 @Entity
-@Table(name = "libro")
 public class Libro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; // ID autogenerado del libro
 
-    // nombre del libro
-    private String titulo;
-    // autor principal
-    private String autor;
+    private String titulo; // Título del libro
+    private String autor;  // Autor del libro
+    private String categoria; // Categoría del libro
 
-    // pequeño texto sobre el libro
-    private String descripcion;
-    // cantidad que quedan en biblioteca
-    private int stock;
+    // Este campo indica si se puede prestar
+    private boolean disponible = true;
+
+    // Constructor vacío requerido por JPA
     public Libro() {
-        // constructor vacío
     }
-    public Libro(String titulo, String autor, String descripcion, int stock) {
+
+    // Constructor para crear libro con datos iniciales
+    public Libro(String titulo, String autor, String categoria) {
         this.titulo = titulo;
         this.autor = autor;
-        this.descripcion = descripcion;
-        this.stock = stock;
+        this.categoria = categoria;
+        this.disponible = true; // por defecto disponible
     }
-    // getters y setters
+
+    // Getters y setters
     public Long getId() {
         return id;
     }
+
     public String getTitulo() {
         return titulo;
     }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -45,19 +47,25 @@ public class Libro {
     public String getAutor() {
         return autor;
     }
+
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    public String getDescripcion() {
-        return descripcion;
+
+    public String getCategoria() {
+        return categoria;
     }
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
-    public int getStock() {
-        return stock;
+
+    // Getter estándar para boolean
+    public boolean isDisponible() {
+        return disponible;
     }
-    public void setStock(int stock) {
-        this.stock = stock;
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }
